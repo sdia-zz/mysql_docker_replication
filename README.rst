@@ -35,10 +35,12 @@ Master ...
     sdia/mysql-barebone
 
 
+
 Slave ...
 
 
 .. code::
+
   docker run -d -p 3307:3306      \
     -e REPLICATION_SLAVE=true     \
     -e MYSQL_PASS="mypass"        \
@@ -59,9 +61,11 @@ Misc
 
 
 .. code::
+
   docker rm $(docker ps -a -q) && \
   docker rmi $(docker images -q)
 
 
 .. code::
+
   docker restart mysql
