@@ -20,25 +20,32 @@ Build container
 Run master and slave
 --------------------
 
+Master ...
+
+
 .. code::
 
   docker run -d -p 3306:3306        \
-    -e REPLICATION_PASS="mypass"  \
-    -e ON_CREATE_DB="scv"         \
-    -e MYSQL_PASS="mypass"        \
-    -e STARTUP_SQL="./init.sql"   \
+    -e REPLICATION_PASS="mypass"    \
+    -e ON_CREATE_DB="scv"           \
+    -e MYSQL_PASS="mypass"          \
+    -e STARTUP_SQL="./init.sql"     \
     -e REPLICATION_MASTER="true"    \
-    --name mysql   \
+    --name mysql                    \
     sdia/mysql-barebone
 
+
+Slave ...
+
+
 .. code::
-docker run -d -p 3307:3306    \
-    -e REPLICATION_SLAVE=true  \
-    -e MYSQL_PASS="mypass"    \
+  docker run -d -p 3307:3306      \
+    -e REPLICATION_SLAVE=true     \
+    -e MYSQL_PASS="mypass"        \
     -e ON_CREATE_DB="scv"         \
     -e MYSQL_PASS="mypass"        \
     -e STARTUP_SQL="./init.sql"   \
-    --link mysql:mysql   \
+    --link mysql:mysql            \
     sdia/mysql-barebone
 
 
@@ -46,11 +53,15 @@ docker run -d -p 3307:3306    \
 Misc
 ----
 
-mysql -u admin -p -h 192.168.99.100
+.. code::
 
-docker rm $(docker ps -a -q) && \
-docker rmi $(docker images -q)
-
+  mysql -u admin -p -h 192.168.99.100
 
 
-docker restart mysql
+.. code::
+  docker rm $(docker ps -a -q) && \
+  docker rmi $(docker images -q)
+
+
+.. code::
+  docker restart mysql
