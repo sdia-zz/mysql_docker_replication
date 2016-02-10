@@ -41,6 +41,7 @@ def main():
 
         except Exception as e:
             print(e)
+            connection.close()
             break
 
 if __name__ == '__main__':

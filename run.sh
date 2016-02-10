@@ -120,6 +120,7 @@ if [ -n "${REPLICATION_SLAVE}" ]; then
             echo "=> Writting configuration file '${CONF_FILE}' with server-id=${RAND}"
             sed -i "s/^#server-id.*/server-id = ${RAND}/" ${CONF_FILE}
             sed -i "s/^#log-bin.*/log-bin = mysql-bin/" ${CONF_FILE}
+	    sed -i "s/^#log-bin-fmt.*/binlog_format = row/" ${CONF_FILE}
             touch /replication_set.1
         else
             echo "=> MySQL replication slave already configured, skip"
