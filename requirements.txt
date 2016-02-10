@@ -1,2 +1,2 @@
-mysql-replication
-PyMySQL
+mysql-replication==0.7
+PyMySQL==0.6.7

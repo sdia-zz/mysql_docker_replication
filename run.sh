@@ -103,9 +103,10 @@ if [ -n "${REPLICATION_MASTER}" ]; then
     if [ ! -f /replication_set.1 ]; then
         RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"
         echo "=> Writting configuration file '${CONF_FILE}' with server-id=${RAND}"
+	# TODO: these sed commands does not work !
         sed -i "s/^#server-id.*/server-id = ${RAND}/" ${CONF_FILE}
         sed -i "s/^#log-bin.*/log-bin = mysql-bin/" ${CONF_FILE}
-	sed -i "s/^#log-bin-fmt.*/binlog_format = row/" ${CONF_FILE}
+	sed -i "s/^#log-bin-fmt.*/binlog_format = ROW/" ${CONF_FILE}
         touch /replication_set.1
     else
         echo "=> MySQL replication master already configured, skip"
