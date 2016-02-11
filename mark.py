@@ -21,8 +21,8 @@ def get_rows():
                                 server_id=1,
                                 blocking=True,
                                 resume_stream=True,
-                                log_file='mysql-bin.000001',
-                                log_pos=12169025,
+                                # log_file='mysql-bin.000001',
+                                # log_pos=12169025,
                                 only_events=[WriteRowsEvent,
                                              UpdateRowsEvent])
     for binlogevent in stream:
