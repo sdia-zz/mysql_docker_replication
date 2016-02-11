@@ -11,7 +11,6 @@ from pymysqlreplication.row_event import (
 )
 
 
-
 mysql_settings = {'host': '192.168.99.100', 'port': 3306, 'user': 'admin', 'passwd': 'mypass'}
 current_micro_time = lambda: int(time.time() * 1e6)
 json_file_folder = '/tmp/'
@@ -37,27 +36,19 @@ def get_rows():
                 values = row['values'] # this is a dict
             elif isinstance(binlogevent, UpdateRowsEvent):
                 values = row['after_values']
-            
             yield dict(
                 metadata = metadata,
                 payload = values)
-            
     stream.close()
-
-
 
 
 def process_row(r):
     # datetime.datetime is not json serializable
     rc = copy.deepcopy(r)
-
     for k,v in r['payload'].iteritems():
         if isinstance(v, datetime.datetime):
             rc['payload'][k] = v.strftime('%Y-%m-%d %H:%M:%S')
-
     return rc
-
-
 
 
 def dump_to_file(r):
@@ -70,7 +61,6 @@ def dump_to_file(r):
         mode = 'a'
     with open(fpath, mode) as f:
         f.write('{}\n'.format(json.dumps(r)))
-    
 
 
 if __name__ == '__main__':
